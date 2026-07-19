@@ -1,5 +1,5 @@
 // Cross-Cultural E-Commerce Data
-// USA, Japan, Ethiopia, Saudi Arabia
+// USA, Japan, Ethiopia (Amharic), Saudi Arabia, Spain
 
 const COUNTRIES = {
     usa: {
@@ -156,50 +156,50 @@ const COUNTRIES = {
         dir: 'ltr',
         theme: 'ethiopia',
         product: {
-            title: 'Sony WH-1000XM5 Wireless Headphones',
+            title: 'Sony WH-1000XM5 ዋይርሌስ ሄድፎኖች',
             price: 18500,
             originalPrice: 22000,
-            discount: 'Save ETB 3,500',
+            discount: 'ETB 3,500 ትንሽ',
             rating: 4.6,
             reviews: 842,
-            reviewText: '842 reviews from verified buyers',
-            badge: 'Top Rated',
-            description: 'Premium wireless headphones with world-class noise cancellation. Perfect for studying, working, and enjoying music. Trusted by thousands of customers across Ethiopia.',
+            reviewText: '842 የተረጋገጡ ግዢዎች',
+            badge: 'ከፍተኛ ደረጃ',
+            description: 'በዓለም ላይ ከሚገኙት ምርጥ የድምፅ መረታት ጋር የተሟላ ዋይርሌስ ሄድፎን። ለትምህርት፣ ለስራ፣ እና ለሙዚቃ መዝናኛ ተስማሚ። በኢትዮጵያ ውስጥ በሺህዎች የሚቆጠሩ ደንበኞች የተረጋገጠ።',
             specs: [
-                { label: 'Battery Life', value: '30 hours' },
-                { label: 'Weight', value: '250g' },
-                { label: 'Connectivity', value: 'Bluetooth 5.2' },
-                { label: 'Warranty', value: '6 Months' }
+                { label: 'የባትሪ ዘመን', value: '30 ሰዓታት' },
+                { label: 'ክብደት', value: '250ግራም' },
+                { label: 'መገናኛ', value: 'ብሉቱዝ 5.2' },
+                { label: 'ዋስትና', value: '6 ወራት' }
             ],
             trustBadges: [
-                { icon: '🤝', text: 'Trusted by 5,000+ locals' },
-                { icon: '📞', text: 'Call to Verify: 0911-234-567' },
-                { icon: '🚚', text: 'Free Delivery in Addis' },
-                { icon: '💰', text: 'Cash on Delivery' }
+                { icon: '🤝', text: 'በ5,000+ ደንበኞች የተረጋገጠ' },
+                { icon: '📞', text: 'ይደውሉ: 0911-234-567' },
+                { icon: '🚚', text: 'በአዲስ አበባ ነፃ ደረሰኝ' },
+                { icon: '💰', text: 'የገንዘብ ክፍያ በደረሰኝ' }
             ],
-            socialProof: '👥 47 people from your area bought this last week',
-            ctaPrimary: 'Add to Cart',
-            ctaSecondary: 'Share with Friends'
+            socialProof: '👥 ከአካባቢዎ 47 ሰዎች በዚህ ሳምንት ገዝተዋል',
+            ctaPrimary: 'ወደ ጋሪ አክል',
+            ctaSecondary: 'ለጓደኞች አጋራ'
         },
         checkout: {
-            title: 'Complete Your Order',
-            subtitle: 'Fast and secure checkout — delivered to your door',
-            shippingTitle: '📦 Delivery Details',
-            paymentTitle: '💰 Payment Options',
+            title: 'ትዕዛዝዎን ያጠናቅቁ',
+            subtitle: 'በፍጥነት እና በደህናነት ይግዙ — ወደ ደጃፍዎ እናደርሳለን',
+            shippingTitle: '📦 የማስረከቢያ ዝርዝሮች',
+            paymentTitle: '💰 የክፍያ አማራጮች',
             fields: [
-                { name: 'fullName', label: 'Full Name', type: 'text', placeholder: 'Abebe Kebede', required: true },
-                { name: 'phone', label: 'Phone Number *', type: 'tel', placeholder: '0911 234 567', required: true },
-                { name: 'altPhone', label: 'Alternative Phone (Optional)', type: 'tel', placeholder: '0922 345 678', required: false },
-                { name: 'city', label: 'City', type: 'select', options: ['Addis Ababa', 'Dire Dawa', 'Bahir Dar', 'Hawassa', 'Mekelle'], required: true },
-                { name: 'subcity', label: 'Sub-City / Kebele', type: 'text', placeholder: 'Bole, Kebele 15', required: true },
-                { name: 'landmark', label: 'Nearby Landmark', type: 'text', placeholder: 'Near Edna Mall / Bole Medhanealem Church', required: true, full: true },
-                { name: 'deliveryNote', label: 'Delivery Instructions', type: 'text', placeholder: 'Call when you arrive at the gate', required: false, full: true }
+                { name: 'fullName', label: 'ሙሉ ስም', type: 'text', placeholder: 'አበበ ከበደ', required: true },
+                { name: 'phone', label: 'ስልክ ቁጥር *', type: 'tel', placeholder: '0911 234 567', required: true },
+                { name: 'altPhone', label: 'አማራጭ ስልክ (አማራጭ)', type: 'tel', placeholder: '0922 345 678', required: false },
+                { name: 'city', label: 'ከተማ', type: 'select', options: ['አዲስ አበባ', 'ድሬዳዋ', 'ባህር ዳር', 'ሀዋሳ', 'መቀሌ'], required: true },
+                { name: 'subcity', label: 'ክፍለ ከተማ / ቀበሌ', type: 'text', placeholder: 'ቦሌ, ቀበሌ 15', required: true },
+                { name: 'landmark', label: 'በአቅራቢያው ያለ ምልክት', type: 'text', placeholder: 'ከኤድና ሞል አጠገብ / ከቦሌ መድኃኔዓለም ቤ/ክ አጠገብ', required: true, full: true },
+                { name: 'deliveryNote', label: 'የማስረከቢያ መመሪያ', type: 'text', placeholder: 'በደጃፍ ሲደርሱ ይደውሉ', required: false, full: true }
             ],
             paymentMethods: [
-                { id: 'cod', icon: '💵', name: 'Cash on Delivery', desc: 'Pay when the delivery arrives at your door' },
-                { id: 'telebirr', icon: '📲', name: 'Telebirr', desc: 'Pay with your Telebirr mobile money wallet' },
-                { id: 'cbe', icon: '🏦', name: 'CBE Birr', desc: 'Transfer via Commercial Bank of Ethiopia' },
-                { id: 'card', icon: '💳', name: 'Bank Card', desc: 'Visa or Mastercard (if available)' }
+                { id: 'cod', icon: '💵', name: 'የገንዘብ ክፍያ በደረሰኝ', desc: 'ደረሰኝ ሲደርስ በደጃፍዎ ይክፈሉ' },
+                { id: 'telebirr', icon: '📲', name: 'ቴሌብር', desc: 'በቴሌብር ሞባይል መንዣ የሚከፍሉ' },
+                { id: 'cbe', icon: '🏦', name: 'CBE ብር', desc: 'በኢትዮጵያ ንግድ ባንክ ያስተላልፉ' },
+                { id: 'card', icon: '💳', name: 'ባንክ ካርድ', desc: 'ቪዛ ወይም ማስተርካርድ (ካለ)' }
             ],
             orderSummary: {
                 subtotal: 18500,
@@ -207,16 +207,16 @@ const COUNTRIES = {
                 tax: 0,
                 total: 18500
             },
-            submitBtn: 'Confirm Order — ETB 18,500',
-            securityNote: '✅ No payment required now for Cash on Delivery'
+            submitBtn: 'ትዕዛዝ ያረጋግጡ — ETB 18,500',
+            securityNote: '✅ ለየገንዘብ ክፍያ በደረሰኝ አሁን ምንም ክፍያ አያስፈልግም'
         },
         confirmation: {
             icon: '🎊',
-            title: 'Order Received!',
-            message: 'Thank you, Abebe! Your order has been placed successfully. Our delivery team will call you within 24 hours to confirm your address. You can pay ETB 18,500 when your package arrives. Share your order with friends and earn rewards!',
+            title: 'ትዕዛዝ ተቀብለናል!',
+            message: 'አበበ አመሰግናለሁ! ትዕዛዝዎ በተሳካ ሁኔታ ተልኳል። የማስረከቢያ ቡድናችን በ24 ሰዓታት ውስጥ ይደውሉዎታል ለአድራሻዎ ማረጋገጥ። ETB 18,500 የሚከፈልዎት ፓኬጅዎ ሲደርስ ነው። ከጓደኞችዎ ጋር ይጋሩ እና ሽልማቶችን ያግኙ!',
             orderNumber: 'ET-2026-00842',
-            deliveryEstimate: 'Delivery: Within 2-3 business days in Addis Ababa',
-            cta: 'Shop More'
+            deliveryEstimate: 'ማስረከቢያ: በአዲስ አበባ ውስጥ በ2-3 የስራ ቀናት',
+            cta: 'ተጨማሪ ይግዙ'
         }
     },
 
@@ -289,6 +289,79 @@ const COUNTRIES = {
             orderNumber: 'SA-2026-15234',
             deliveryEstimate: 'التوصيل المتوقع: 22 - 24 يوليو',
             cta: 'مواصلة التسوق'
+        }
+    },
+
+    spain: {
+        code: 'spain',
+        name: 'España',
+        flag: '🇪🇸',
+        currency: '€',
+        dir: 'ltr',
+        theme: 'spain',
+        product: {
+            title: 'Auriculares Inalámbricos Sony WH-1000XM5',
+            price: 329.00,
+            originalPrice: 379.00,
+            discount: '13% DTO',
+            rating: 4.7,
+            reviews: 8932,
+            reviewText: '8,932 opiniones verificadas',
+            badge: 'Más Vendido',
+            description: 'Cancelación de ruido líder en la industria, calidad de sonido excepcional y comodidad premium para escuchar todo el día. Perfectos para trabajar, viajar y disfrutar del entretenimiento inmersivo.',
+            specs: [
+                { label: 'Duración Batería', value: '30 horas' },
+                { label: 'Peso', value: '250g' },
+                { label: 'Conectividad', value: 'Bluetooth 5.2' },
+                { label: 'Garantía', value: '2 Años' }
+            ],
+            trustBadges: [
+                { icon: '🛡️', text: 'Garantía 2 Años' },
+                { icon: '↩️', text: 'Devolución 30 Días' },
+                { icon: '🔒', text: 'Pago Seguro' },
+                { icon: '🇪🇺', text: 'Producto UE' }
+            ],
+            socialProof: null,
+            ctaPrimary: 'Añadir al Carrito',
+            ctaSecondary: 'Guardar para Después'
+        },
+        checkout: {
+            title: 'Finalizar Compra',
+            subtitle: 'Completa tu compra de forma segura',
+            shippingTitle: '📦 Información de Envío',
+            paymentTitle: '💳 Método de Pago',
+            fields: [
+                { name: 'fullName', label: 'Nombre Completo', type: 'text', placeholder: 'Juan García López', required: true },
+                { name: 'email', label: 'Correo Electrónico', type: 'email', placeholder: 'juan@example.es', required: true },
+                { name: 'address', label: 'Dirección', type: 'text', placeholder: 'Calle Mayor 123, 4ºB', required: true, full: true },
+                { name: 'city', label: 'Ciudad', type: 'text', placeholder: 'Madrid', required: true },
+                { name: 'province', label: 'Provincia', type: 'select', options: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Málaga'], required: true },
+                { name: 'postal', label: 'Código Postal', type: 'text', placeholder: '28001', required: true },
+                { name: 'phone', label: 'Teléfono', type: 'tel', placeholder: '+34 612 345 678', required: true },
+                { name: 'dni', label: 'DNI / NIE', type: 'text', placeholder: '12345678A', required: true }
+            ],
+            paymentMethods: [
+                { id: 'card', icon: '💳', name: 'Tarjeta de Crédito / Débito', desc: 'Visa, Mastercard, American Express' },
+                { id: 'paypal', icon: '🅿️', name: 'PayPal', desc: 'Paga con tu cuenta de PayPal' },
+                { id: 'bizum', icon: '📱', name: 'Bizum', desc: 'Pago instantáneo desde tu móvil' },
+                { id: 'klarna', icon: '💎', name: 'Klarna', desc: 'Paga en 3 plazos sin intereses' }
+            ],
+            orderSummary: {
+                subtotal: 329.00,
+                shipping: 0.00,
+                tax: 68.09,
+                total: 397.09
+            },
+            submitBtn: 'Confirmar Pedido — 397,09 €',
+            securityNote: '🔒 Tu pago está protegido con encriptación SSL de 256 bits'
+        },
+        confirmation: {
+            icon: '🎉',
+            title: '¡Pedido Confirmado!',
+            message: '¡Gracias por tu compra, Juan! Tu pedido ha sido recibido y está siendo procesado. Recibirás un correo de confirmación con los detalles de seguimiento en breve.',
+            orderNumber: 'ES-2026-08932',
+            deliveryEstimate: 'Entrega estimada: 22 - 24 de julio',
+            cta: 'Seguir Comprando'
         }
     }
 };
