@@ -1,15 +1,37 @@
 // Cross-Cultural E-Commerce App
-// Handles routing, rendering, and country switching
+// Handles routing, rendering, dark mode, country switching
 
 let currentCountry = 'usa';
 let currentView = 'product';
 let cart = [];
 let selectedPayment = null;
+let darkMode = false;
 
 // Initialize
 function init() {
     loadCountry();
+    loadTheme();
     render();
+}
+
+// Dark Mode Toggle
+function toggleDarkMode() {
+    darkMode = !darkMode;
+    document.body.classList.toggle('dark-mode', darkMode);
+    localStorage.setItem('darkMode', darkMode);
+
+    const icon = document.getElementById('themeToggle');
+    if (icon) {
+        icon.querySelector('.theme-icon').textContent = darkMode ? '☀️' : '🌙';
+    }
+}
+
+function loadTheme() {
+    const saved = localStorage.getItem('darkMode');
+    if (saved === 'true') {
+        darkMode = true;
+        document.body.classList.add('dark-mode');
+    }
 }
 
 // Country Switching
@@ -17,10 +39,9 @@ function setCountry(countryCode) {
     currentCountry = countryCode;
     localStorage.setItem('selectedCountry', countryCode);
 
-    // Update active button
-    document.querySelectorAll('.country-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.country === countryCode);
-    });
+    // Update dropdown
+    const select = document.getElementById('countrySelect');
+    if (select) select.value = countryCode;
 
     // Apply theme and direction
     const data = COUNTRIES[countryCode];
@@ -28,7 +49,8 @@ function setCountry(countryCode) {
     document.documentElement.setAttribute('dir', data.dir);
     document.documentElement.setAttribute('lang', 
         countryCode === 'japan' ? 'ja' : 
-        countryCode === 'saudi' ? 'ar' : 'en'
+        countryCode === 'saudi' ? 'ar' : 
+        countryCode === 'spain' ? 'es' : 'en'
     );
 
     // Reset to product view on country change for demo clarity
@@ -41,7 +63,18 @@ function loadCountry() {
     if (saved && COUNTRIES[saved]) {
         currentCountry = saved;
     }
-    setCountry(currentCountry);
+    // Don't call setCountry here to avoid double render, just apply settings
+    const data = COUNTRIES[currentCountry];
+    document.body.setAttribute('data-theme', data.theme);
+    document.documentElement.setAttribute('dir', data.dir);
+    document.documentElement.setAttribute('lang', 
+        currentCountry === 'japan' ? 'ja' : 
+        currentCountry === 'saudi' ? 'ar' : 
+        currentCountry === 'spain' ? 'es' : 'en'
+    );
+
+    const select = document.getElementById('countrySelect');
+    if (select) select.value = currentCountry;
 }
 
 // Navigation
@@ -60,6 +93,16 @@ function render() {
 
     // Re-attach event listeners after render
     attachListeners();
+
+    // Update theme toggle icon
+    const toggle = document.getElementById('themeToggle');
+    if (toggle) {
+        toggle.querySelector('.theme-icon').textContent = darkMode ? '☀️' : '🌙';
+    }
+
+    // Ensure dropdown matches current country
+    const select = document.getElementById('countrySelect');
+    if (select) select.value = currentCountry;
 }
 
 function getViewHTML(data) {
@@ -159,9 +202,9 @@ function renderCheckout(data) {
     return `
         <div class="container checkout-page">
             <div class="progress-bar">
-                <div class="progress-step completed"><span class="step-number">✓</span> Product</div>
-                <div class="progress-step active"><span class="step-number">2</span> Checkout</div>
-                <div class="progress-step"><span class="step-number">3</span> Confirmation</div>
+                <div class="progress-step completed"><span class="step-number">✓</span> ${getProductLabel()}</div>
+                <div class="progress-step active"><span class="step-number">2</span> ${getCheckoutLabel()}</div>
+                <div class="progress-step"><span class="step-number">3</span> ${getConfirmLabel()}</div>
             </div>
             <div class="checkout-header">
                 <h2>${c.title}</h2>
@@ -181,11 +224,11 @@ function renderCheckout(data) {
                     <p style="text-align:center;color:var(--text-secondary);font-size:0.875rem;margin-top:0.5rem;">${c.securityNote}</p>
                 </div>
                 <div class="order-summary">
-                    <h3>Order Summary</h3>
-                    <div class="summary-item"><span>Subtotal</span><span>${fmt(c.orderSummary.subtotal)}</span></div>
-                    <div class="summary-item"><span>Shipping</span><span>${c.orderSummary.shipping === 0 ? 'FREE' : fmt(c.orderSummary.shipping)}</span></div>
-                    <div class="summary-item"><span>Tax</span><span>${fmt(c.orderSummary.tax)}</span></div>
-                    <div class="summary-item total"><span>Total</span><span>${fmt(c.orderSummary.total)}</span></div>
+                    <h3>${getOrderSummaryLabel()}</h3>
+                    <div class="summary-item"><span>${getSubtotalLabel()}</span><span>${fmt(c.orderSummary.subtotal)}</span></div>
+                    <div class="summary-item"><span>${getShippingLabel()}</span><span>${c.orderSummary.shipping === 0 ? getFreeLabel() : fmt(c.orderSummary.shipping)}</span></div>
+                    <div class="summary-item"><span>${getTaxLabel()}</span><span>${fmt(c.orderSummary.tax)}</span></div>
+                    <div class="summary-item total"><span>${getTotalLabel()}</span><span>${fmt(c.orderSummary.total)}</span></div>
                 </div>
             </div>
         </div>
@@ -198,17 +241,17 @@ function renderConfirmation(data) {
     return `
         <div class="container confirmation-page">
             <div class="progress-bar">
-                <div class="progress-step completed"><span class="step-number">✓</span> Product</div>
-                <div class="progress-step completed"><span class="step-number">✓</span> Checkout</div>
-                <div class="progress-step active"><span class="step-number">3</span> Confirmation</div>
+                <div class="progress-step completed"><span class="step-number">✓</span> ${getProductLabel()}</div>
+                <div class="progress-step completed"><span class="step-number">✓</span> ${getCheckoutLabel()}</div>
+                <div class="progress-step active"><span class="step-number">3</span> ${getConfirmLabel()}</div>
             </div>
             <div class="confirmation-card">
                 <div class="confirmation-icon">${c.icon}</div>
                 <h2 class="confirmation-title">${c.title}</h2>
                 <p class="confirmation-message">${c.message}</p>
                 <div class="order-details">
-                    <h4>Order Details</h4>
-                    <div class="detail-row"><span>Order Number</span><span style="font-weight:600;">${c.orderNumber}</span></div>
+                    <h4>${getOrderDetailsLabel()}</h4>
+                    <div class="detail-row"><span>${getOrderNumberLabel()}</span><span style="font-weight:600;">${c.orderNumber}</span></div>
                     <div class="detail-row"><span>${c.deliveryEstimate}</span></div>
                 </div>
                 <button class="btn btn-primary" onclick="navigateTo('product')">${c.cta}</button>
@@ -217,12 +260,59 @@ function renderConfirmation(data) {
     `;
 }
 
+// ===== LOCALIZED LABELS =====
+function getProductLabel() {
+    const labels = { usa: 'Product', japan: '商品', ethiopia: 'ምርት', saudi: 'المنتج', spain: 'Producto' };
+    return labels[currentCountry] || 'Product';
+}
+function getCheckoutLabel() {
+    const labels = { usa: 'Checkout', japan: '決済', ethiopia: 'ክፍያ', saudi: 'الدفع', spain: 'Pago' };
+    return labels[currentCountry] || 'Checkout';
+}
+function getConfirmLabel() {
+    const labels = { usa: 'Confirm', japan: '確認', ethiopia: 'ማረጋገጫ', saudi: 'تأكيد', spain: 'Confirmar' };
+    return labels[currentCountry] || 'Confirm';
+}
+function getOrderSummaryLabel() {
+    const labels = { usa: 'Order Summary', japan: '注文内容', ethiopia: 'የትዕዛዝ ማጠቃለያ', saudi: 'ملخص الطلب', spain: 'Resumen del Pedido' };
+    return labels[currentCountry] || 'Order Summary';
+}
+function getSubtotalLabel() {
+    const labels = { usa: 'Subtotal', japan: '小計', ethiopia: 'ዋና ዋጋ', saudi: 'المجموع الفرعي', spain: 'Subtotal' };
+    return labels[currentCountry] || 'Subtotal';
+}
+function getShippingLabel() {
+    const labels = { usa: 'Shipping', japan: '送料', ethiopia: 'ደረሰኝ', saudi: 'الشحن', spain: 'Envío' };
+    return labels[currentCountry] || 'Shipping';
+}
+function getTaxLabel() {
+    const labels = { usa: 'Tax', japan: '消費税', ethiopia: 'ግብር', saudi: 'الضريبة', spain: 'Impuestos' };
+    return labels[currentCountry] || 'Tax';
+}
+function getTotalLabel() {
+    const labels = { usa: 'Total', japan: '合計', ethiopia: 'ጠቅላላ', saudi: 'الإجمالي', spain: 'Total' };
+    return labels[currentCountry] || 'Total';
+}
+function getFreeLabel() {
+    const labels = { usa: 'FREE', japan: '無料', ethiopia: 'ነፃ', saudi: 'مجاني', spain: 'GRATIS' };
+    return labels[currentCountry] || 'FREE';
+}
+function getOrderDetailsLabel() {
+    const labels = { usa: 'Order Details', japan: '注文詳細', ethiopia: 'የትዕዛዝ ዝርዝሮች', saudi: 'تفاصيل الطلب', spain: 'Detalles del Pedido' };
+    return labels[currentCountry] || 'Order Details';
+}
+function getOrderNumberLabel() {
+    const labels = { usa: 'Order Number', japan: '注文番号', ethiopia: 'የትዕዛዝ ቁጥር', saudi: 'رقم الطلب', spain: 'Número de Pedido' };
+    return labels[currentCountry] || 'Order Number';
+}
+
 // ===== HELPERS =====
 function formatPrice(amount, currency) {
     if (currency === '$') return `$${amount.toFixed(2)}`;
     if (currency === '¥') return `¥${amount.toLocaleString()}`;
     if (currency === 'ETB') return `ETB ${amount.toLocaleString()}`;
     if (currency === 'SAR') return `${amount.toFixed(2)} ر.س`;
+    if (currency === '€') return `${amount.toFixed(2).replace('.', ',')} €`;
     return `${currency} ${amount}`;
 }
 
@@ -245,9 +335,14 @@ function addToCart() {
 }
 
 function addToWishlist() {
-    alert(currentCountry === 'japan' ? 'お気に入りに登録しました！' : 
-          currentCountry === 'saudi' ? 'تمت الإضافة إلى المفضلة!' : 
-          'Added to wishlist!');
+    const messages = {
+        usa: 'Added to wishlist!',
+        japan: 'お気に入りに登録しました！',
+        ethiopia: 'በወደድኩት ውስጥ ተጨምሯል!',
+        saudi: 'تمت الإضافة إلى المفضلة!',
+        spain: '¡Guardado para más tarde!'
+    };
+    alert(messages[currentCountry] || 'Added to wishlist!');
 }
 
 function submitOrder() {
@@ -267,16 +362,26 @@ function submitOrder() {
     }
 
     if (!selectedPayment) {
-        alert(currentCountry === 'japan' ? 'お支払い方法を選択してください' :
-              currentCountry === 'saudi' ? 'الرجاء اختيار طريقة الدفع' :
-              'Please select a payment method');
+        const messages = {
+            usa: 'Please select a payment method',
+            japan: 'お支払い方法を選択してください',
+            ethiopia: 'እባክዎ የክፍያ ዘዴ ይምረጡ',
+            saudi: 'الرجاء اختيار طريقة الدفع',
+            spain: 'Por favor selecciona un método de pago'
+        };
+        alert(messages[currentCountry] || 'Please select a payment method');
         return;
     }
 
     if (!valid) {
-        alert(currentCountry === 'japan' ? '必須項目を入力してください' :
-              currentCountry === 'saudi' ? 'الرجاء ملء جميع الحقول المطلوبة' :
-              'Please fill in all required fields');
+        const messages = {
+            usa: 'Please fill in all required fields',
+            japan: '必須項目を入力してください',
+            ethiopia: 'እባክዎ ሁሉንም አስፈላጊ መስኮች ይሙሉ',
+            saudi: 'الرجاء ملء جميع الحقول المطلوبة',
+            spain: 'Por favor completa todos los campos obligatorios'
+        };
+        alert(messages[currentCountry] || 'Please fill in all required fields');
         return;
     }
 
