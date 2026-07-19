@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalShop - Cross-Cultural E-Commerce</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">GlobalShop</div>
+        <div class="country-selector">
+            <span class="selector-label">Region:</span>
+            <button class="country-btn active" data-country="usa" onclick="setCountry('usa')">🇺🇸 USA</button>
+            <button class="country-btn" data-country="japan" onclick="setCountry('japan')">🇯🇵 Japan</button>
+            <button class="country-btn" data-country="ethiopia" onclick="setCountry('ethiopia')">🇪🇹 Ethiopia</button>
+            <button class="country-btn" data-country="saudi" onclick="setCountry('saudi')">🇸🇦 Saudi Arabia</button>
+        </div>
+    </nav>
+
+    <main id="app">
+        <!-- Views injected by JS -->
+    </main>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
