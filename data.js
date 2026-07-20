@@ -244,7 +244,7 @@ const COUNTRIES = {
                 { label: 'الضمان', value: 'سنتان' }
             ],
             trustBadges: [
-                { icon: '☪️', text: 'حلال - معتمدة' },
+                { icon: '✅', text: 'SASO Certified' },
                 { icon: '✅', text: 'شهادة الجودة السعودية' },
                 { icon: '📜', text: 'ضمان سنتان شامل' },
                 { icon: '🏠', text: 'توصيل مجاني للمنزل' }
